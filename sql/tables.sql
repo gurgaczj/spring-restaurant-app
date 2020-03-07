@@ -11,11 +11,12 @@ CREATE TABLE role
 CREATE TABLE address
 (
     id               INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    street           VARCHAR(128) NOT NULL,
-    postal_code      VARCHAR(6)   NOT NULL,
-    city             VARCHAR(128) NOT NULL,
-    apartment_number SMALLINT     NOT NULL,
-    flat_number      TINYINT DEFAULT NULL
+    street           VARCHAR(128)      NOT NULL,
+    house_number SMALLINT UNSIGNED NOT NULL,
+    apartment_number SMALLINT UNSIGNED DEFAULT NULL,
+    flat_number      TINYINT UNSIGNED DEFAULT NULL,
+    postal_code      VARCHAR(6)        NOT NULL,
+    city             VARCHAR(128)      NOT NULL
 ) CHARACTER SET utf8
   COLLATE utf8_polish_ci;
 
@@ -35,7 +36,7 @@ CREATE TABLE registration_info
     id                INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     registration_date DATETIME NOT NULL,
     hash              VARCHAR(64),
-    activation_date   DATETIME NOT NULL
+    activation_date   DATETIME DEFAULT NULL
 );
 
 CREATE TABLE user
