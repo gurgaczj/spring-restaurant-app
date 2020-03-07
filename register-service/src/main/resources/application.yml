@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: register-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/restaurant_users
+    username: root
+    password: password
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8990/eureka
+  instance:
+    prefer-ip-address: true
+server:
+  port: 8081
+
