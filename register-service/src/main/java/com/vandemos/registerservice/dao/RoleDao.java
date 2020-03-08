@@ -5,6 +5,7 @@ import com.vandemos.registerservice.model.RoleEnum;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity(name = "role")
@@ -18,6 +19,7 @@ public class RoleDao {
 
     @Column(name = "rolename")
     @Enumerated(EnumType.STRING)
+    @NotNull
     private RoleEnum roleEnum;
 
     @OneToMany(mappedBy = "role")
