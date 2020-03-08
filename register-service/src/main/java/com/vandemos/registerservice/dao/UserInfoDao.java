@@ -1,5 +1,6 @@
 package com.vandemos.registerservice.dao;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -25,6 +26,10 @@ public class UserInfoDao {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private AddressDao address;
+
+    @OneToOne(mappedBy = "userInfo")
+    @JsonIgnore
+    private UserDao user;
 
     public UserInfoDao() {
     }
