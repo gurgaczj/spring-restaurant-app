@@ -1,7 +1,7 @@
 USE restaurant_users;
 
-INSERT INTO restaurant_users.role VALUES (NULL, 'admin');
-INSERT INTO restaurant_users.role VALUES (NULL, 'user');
+INSERT INTO restaurant_users.role VALUES (NULL, 'ADMIN');
+INSERT INTO restaurant_users.role VALUES (NULL, 'USER');
 
 INSERT INTO restaurant_users.address VALUES (NULL, '3-go Maja', 13, NULL, NULL, '34-532', 'Kraków');
 INSERT INTO restaurant_users.address VALUES (NULL, 'Ulicowata', 15, 10, 2, '12-452', 'Warszawa');
