@@ -33,7 +33,7 @@ public class AddressDao {
     @NotNull
     private String city;
 
-    @OneToOne(mappedBy = "address", fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "address", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private UserInfoDao user;
 

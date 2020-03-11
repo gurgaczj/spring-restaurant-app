@@ -22,7 +22,7 @@ public class RoleDao {
     @NotNull
     private RoleEnum roleEnum;
 
-    @OneToMany(mappedBy = "role")
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<UserDao> user;
 

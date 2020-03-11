@@ -32,7 +32,7 @@ public class UserInfoDao {
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private AddressDao address;
 
-    @OneToOne(mappedBy = "userInfo")
+    @OneToOne(mappedBy = "userInfo", cascade = CascadeType.ALL)
     @JsonIgnore
     private UserDao user;
 
@@ -86,7 +86,7 @@ public class UserInfoDao {
     public void setUser(UserDao user) {
         this.user = user;
     }
-    
+
     public UserInfoDto toDto() {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(this, UserInfoDto.class);

@@ -27,7 +27,7 @@ public class RegistrationDao {
     @Column(name = "activation_date")
     private LocalDateTime activationDate;
 
-    @OneToOne(mappedBy = "registration")
+    @OneToOne(mappedBy = "registration", cascade = CascadeType.ALL)
     @JsonIgnore
     private UserDao user;
 
