@@ -9,7 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity(name = "address")
-public class AddressDao implements Dtoable<AddressDto> {
+public class AddressDao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -107,7 +107,6 @@ public class AddressDao implements Dtoable<AddressDto> {
         this.user = user;
     }
 
-    @Override
     public AddressDto toDto() {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(this, AddressDto.class);

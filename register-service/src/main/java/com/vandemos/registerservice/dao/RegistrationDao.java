@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity(name = "registration_info")
-public class RegistrationDao implements Dtoable<RegistrationDto> {
+public class RegistrationDao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,6 @@ public class RegistrationDao implements Dtoable<RegistrationDto> {
 
     public RegistrationDao(){}
 
-    @Override
     public RegistrationDto toDto() {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(this, RegistrationDto.class);

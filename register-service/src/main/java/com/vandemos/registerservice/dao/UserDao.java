@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity(name = "user")
-public class UserDao implements Dtoable<UserDto>{
+public class UserDao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,7 +47,6 @@ public class UserDao implements Dtoable<UserDto>{
 
     public UserDao(){}
 
-    @Override
     public UserDto toDto() {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(this, UserDto.class);

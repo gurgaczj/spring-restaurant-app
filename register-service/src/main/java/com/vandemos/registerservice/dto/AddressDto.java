@@ -1,5 +1,8 @@
 package com.vandemos.registerservice.dto;
 
+import com.vandemos.registerservice.dao.AddressDao;
+import org.modelmapper.ModelMapper;
+
 public class AddressDto {
 
     private String street;
@@ -66,5 +69,10 @@ public class AddressDto {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public AddressDao toDao() {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(this, AddressDao.class);
     }
 }

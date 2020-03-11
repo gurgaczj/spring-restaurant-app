@@ -1,5 +1,9 @@
 package com.vandemos.registerservice.dto;
 
+import com.vandemos.registerservice.dao.AddressDao;
+import com.vandemos.registerservice.dao.RegistrationDao;
+import org.modelmapper.ModelMapper;
+
 import java.time.LocalDateTime;
 
 public class RegistrationDto {
@@ -39,5 +43,10 @@ public class RegistrationDto {
 
     public void setActivationDate(LocalDateTime activationDate) {
         this.activationDate = activationDate;
+    }
+
+    public RegistrationDao toDao() {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(this, RegistrationDao.class);
     }
 }

@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity(name = "role")
-public class RoleDao implements Dtoable<RoleDto> {
+public class RoleDao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,6 @@ public class RoleDao implements Dtoable<RoleDto> {
 
     public RoleDao(){}
 
-    @Override
     public RoleDto toDto() {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(this, RoleDto.class);

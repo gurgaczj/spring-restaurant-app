@@ -1,5 +1,9 @@
 package com.vandemos.registerservice.dto;
 
+import com.vandemos.registerservice.dao.AddressDao;
+import com.vandemos.registerservice.dao.UserDao;
+import org.modelmapper.ModelMapper;
+
 public class UserDto {
 
     private String username;
@@ -76,5 +80,10 @@ public class UserDto {
 
     public void setUserInfo(UserInfoDto userInfo) {
         this.userInfo = userInfo;
+    }
+
+    public UserDao toDao() {
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(this, UserDao.class);
     }
 }

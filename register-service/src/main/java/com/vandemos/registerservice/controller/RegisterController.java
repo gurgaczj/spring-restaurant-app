@@ -1,7 +1,7 @@
 package com.vandemos.registerservice.controller;
 
 import com.vandemos.registerservice.model.RegisterModel;
-import com.vandemos.registerservice.service.RegisterService;
+import com.vandemos.registerservice.register.RegisterService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
