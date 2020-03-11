@@ -5,7 +5,7 @@ USE restaurant_users;
 CREATE TABLE role
 (
     id       INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    rolename enum ('user', 'admin')
+    rolename enum ('USER', 'ADMIN')
 );
 
 CREATE TABLE address
