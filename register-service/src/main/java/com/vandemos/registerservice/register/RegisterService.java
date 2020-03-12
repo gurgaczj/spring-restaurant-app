@@ -1,7 +1,8 @@
 package com.vandemos.registerservice.register;
 
-import com.vandemos.registerservice.email.EmailService;
+import com.vandemos.registerservice.email.EmailClient;
 import com.vandemos.registerservice.exception.ConfirmationException;
+import com.vandemos.registerservice.model.Mail;
 import com.vandemos.registerservice.model.RegisterModel;
 import com.vandemos.registerservice.validator.ValidatorService;
 import org.apache.commons.lang.RandomStringUtils;
@@ -14,12 +15,12 @@ public class RegisterService {
 
     private ValidatorService validatorService;
     private NewUserService newUserService;
-    private EmailService emailService;
+    private EmailClient emailClient;
 
-    public RegisterService(ValidatorService validatorService, NewUserService newUserService, EmailService emailService) {
+    public RegisterService(ValidatorService validatorService, NewUserService newUserService, EmailClient emailClient) {
         this.validatorService = validatorService;
         this.newUserService = newUserService;
-        this.emailService = emailService;
+        this.emailClient = emailClient;
     }
 
     public boolean registerUser(RegisterModel registerModel) {
@@ -32,8 +33,8 @@ public class RegisterService {
             return false;
         }
 
-        emailService.sendAccountActivationLink(registerModel.getEmail(), registerModel.getUser().getFirstName(), hash,
-                registerModel.getUsername());
+        emailClient.sendActivationMail(new Mail(registerModel.getEmail(), registerModel.getUsername(),
+                registerModel.getUser().getFirstName(), hash));
 
         return true;
     }
