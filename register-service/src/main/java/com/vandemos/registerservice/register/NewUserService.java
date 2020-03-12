@@ -4,7 +4,9 @@ import com.vandemos.registerservice.dao.RegistrationDao;
 import com.vandemos.registerservice.dao.RoleDao;
 import com.vandemos.registerservice.dao.UserDao;
 import com.vandemos.registerservice.dao.UserInfoDao;
+import com.vandemos.registerservice.exception.ConfirmationException;
 import com.vandemos.registerservice.exception.RegisterException;
+import com.vandemos.registerservice.exception.UserNotFoundException;
 import com.vandemos.registerservice.model.RegisterModel;
 import com.vandemos.registerservice.model.RoleEnum;
 import com.vandemos.registerservice.service.*;
@@ -77,5 +79,35 @@ public class NewUserService {
 
     public boolean emailExist(String email) {
         return userService.findByEmail(email).isPresent();
+    }
+
+    public void confirmAccount(String username, String hash) {
+        UserDao user = userService.findByUsername(username).orElseThrow(() -> new UserNotFoundException(
+                "Nie znaleziono użytkownika o nazwie " + username +"."));
+
+        if(user.isActivated()){
+            throw new ConfirmationException("Konto zostało już aktywowane.");
+        }
+
+        LocalDateTime registrationDate = user.getRegistration().getRegistrationDate();
+        LocalDateTime threeDaysLater = LocalDateTime.of(registrationDate.getYear(), registrationDate.getMonth(),
+                registrationDate.getDayOfMonth() + 3, registrationDate.getHour(), registrationDate.getMinute());
+
+        if(LocalDateTime.now().isAfter(threeDaysLater)){
+            throw new ConfirmationException("Minął czas na aktywacje.");
+        }
+
+        if(user.getRegistration().getHash().equals(hash)){
+            user.setEnabled(true);
+            user.setActivated(true);
+            user.getRegistration().setActivationDate(LocalDateTime.now());
+        } else {
+            throw new ConfirmationException("Klucze nie zgadzają się.");
+        }
+
+        userService.save(user).orElseThrow(() -> {
+            //TODO: log error
+            return new ConfirmationException("Coś poszło nie tak, spróbuj później.");
+        });
     }
 }
