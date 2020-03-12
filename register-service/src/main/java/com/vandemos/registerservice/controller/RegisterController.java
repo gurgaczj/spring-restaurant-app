@@ -1,20 +1,21 @@
 package com.vandemos.registerservice.controller;
 
+import com.vandemos.registerservice.model.Message;
 import com.vandemos.registerservice.model.RegisterModel;
 import com.vandemos.registerservice.register.RegisterService;
 import com.vandemos.registerservice.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 public class RegisterController {
 
     private RegisterService registerService;
-    private UserService userService;
 
-    public RegisterController(RegisterService registerService, UserService userService){
+    public RegisterController(RegisterService registerService){
         this.registerService = registerService;
-        this.userService = userService;
     }
 
     @PostMapping("/register")
@@ -25,9 +26,10 @@ public class RegisterController {
         return ResponseEntity.badRequest().body("Coś poszło nie tak, spróbuj później.");
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getUser(@PathVariable Long id){
-        return ResponseEntity.ok(userService.getById(id));
+    @GetMapping("/confirm")
+    public ResponseEntity<?> confirmRegistration(@RequestParam(name = "key") Optional<String> key,
+                                                 @RequestParam(name = "username") Optional<String> username){
+        registerService.confirmAccount(username, key);
+        return ResponseEntity.ok().body(new Message("Pomyślnie aktywowano konto ;)"));
     }
-
 }
