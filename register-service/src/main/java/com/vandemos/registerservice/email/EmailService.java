@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService {
 
-    public boolean sendAccountActivationLink(String email, String firstName, String hash){
+    public boolean sendAccountActivationLink(String email, String firstName, String hash, String username){
         return false;
     }
 }
