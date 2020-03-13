@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @FeignClient("email-service")
-public interface EmailClient {
+public interface EmailServiceClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "/activation", consumes = "application/json")
     ResponseEntity<?> sendActivationMail(Mail mail);
