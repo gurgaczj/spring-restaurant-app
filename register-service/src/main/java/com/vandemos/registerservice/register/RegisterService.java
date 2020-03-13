@@ -1,6 +1,6 @@
 package com.vandemos.registerservice.register;
 
-import com.vandemos.registerservice.email.EmailClient;
+import com.vandemos.registerservice.email.EmailServiceClient;
 import com.vandemos.registerservice.exception.ConfirmationException;
 import com.vandemos.registerservice.model.Mail;
 import com.vandemos.registerservice.model.RegisterModel;
@@ -15,12 +15,12 @@ public class RegisterService {
 
     private ValidatorService validatorService;
     private NewUserService newUserService;
-    private EmailClient emailClient;
+    private EmailServiceClient emailServiceClient;
 
-    public RegisterService(ValidatorService validatorService, NewUserService newUserService, EmailClient emailClient) {
+    public RegisterService(ValidatorService validatorService, NewUserService newUserService, EmailServiceClient emailServiceClient) {
         this.validatorService = validatorService;
         this.newUserService = newUserService;
-        this.emailClient = emailClient;
+        this.emailServiceClient = emailServiceClient;
     }
 
     public boolean registerUser(RegisterModel registerModel) {
@@ -33,7 +33,7 @@ public class RegisterService {
             return false;
         }
 
-        emailClient.sendActivationMail(new Mail(registerModel.getEmail(), registerModel.getUsername(),
+        emailServiceClient.sendActivationMail(new Mail(registerModel.getEmail(), registerModel.getUsername(),
                 registerModel.getUser().getFirstName(), hash));
 
         return true;
