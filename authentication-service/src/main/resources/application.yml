@@ -13,3 +13,7 @@ eureka:
     prefer-ip-address: true
 server:
   port: 8083
+
+jwt:
+  expiration: 7 #days after jwt expires
+  signing-key: 2K8hHJdVgyPYh8OTnYPIl9gBb05wLTATqv0Z623jH3wokVwkqGM10i/m10Gof5ry

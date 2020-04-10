@@ -17,16 +17,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class AppWebSecurity extends WebSecurityConfigurerAdapter {
 
     private AppUserDetailsService userDetailsService;
+    private AppAuthFilter appAuthFilter;
 
-    public AppWebSecurity(AppUserDetailsService userDetailsService) {
+    public AppWebSecurity(AppUserDetailsService userDetailsService, AppAuthFilter appAuthFilter) {
         this.userDetailsService = userDetailsService;
+        this.appAuthFilter = appAuthFilter;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
 
-        http.addFilter(new AppAuthFilter(authenticationManager()));
+        http.addFilter(appAuthFilter);
     }
 
     @Override
@@ -42,5 +44,11 @@ public class AppWebSecurity extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }
