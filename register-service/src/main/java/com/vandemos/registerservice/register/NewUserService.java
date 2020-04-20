@@ -19,19 +19,13 @@ import java.util.Optional;
 @Service
 public class NewUserService {
 
-    private AddressService addressService;
-    private UserService userService;
-    private UserInfoService userInfoService;
-    private RoleService roleService;
-    private RegistrationService registrationService;
-    private PasswordEncoder passwordEncoder;
+    private final UserService userService;
+    private final RoleService roleService;
+    private final PasswordEncoder passwordEncoder;
 
-    public NewUserService(AddressService addressService, UserService userService, UserInfoService userInfoService, RoleService roleService, RegistrationService registrationService, PasswordEncoder passwordEncoder) {
-        this.addressService = addressService;
+    public NewUserService(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
-        this.userInfoService = userInfoService;
         this.roleService = roleService;
-        this.registrationService = registrationService;
         this.passwordEncoder = passwordEncoder;
     }
 

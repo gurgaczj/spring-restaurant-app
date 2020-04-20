@@ -9,7 +9,7 @@ import java.util.Optional;
 @Service
 public class AddressService {
 
-    private AddressReposiory addressReposiory;
+    private final AddressReposiory addressReposiory;
 
     public AddressService(AddressReposiory addressReposiory) {
         this.addressReposiory = addressReposiory;

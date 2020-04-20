@@ -16,8 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class AppWebSecurity extends WebSecurityConfigurerAdapter {
 
-    private AppUserDetailsService userDetailsService;
-    private AppAuthFilter appAuthFilter;
+    private final AppUserDetailsService userDetailsService;
+    private final AppAuthFilter appAuthFilter;
 
     public AppWebSecurity(AppUserDetailsService userDetailsService, AppAuthFilter appAuthFilter) {
         this.userDetailsService = userDetailsService;

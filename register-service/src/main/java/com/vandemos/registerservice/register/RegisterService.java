@@ -13,9 +13,9 @@ import java.util.Optional;
 @Service
 public class RegisterService {
 
-    private ValidatorService validatorService;
-    private NewUserService newUserService;
-    private EmailServiceClient emailServiceClient;
+    private final ValidatorService validatorService;
+    private final NewUserService newUserService;
+    private final EmailServiceClient emailServiceClient;
 
     public RegisterService(ValidatorService validatorService, NewUserService newUserService, EmailServiceClient emailServiceClient) {
         this.validatorService = validatorService;

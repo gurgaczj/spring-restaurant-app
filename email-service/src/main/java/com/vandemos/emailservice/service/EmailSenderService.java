@@ -13,8 +13,8 @@ import javax.mail.internet.MimeMessage;
 @Service
 public class EmailSenderService {
 
-    private Properties properties;
-    private JavaMailSenderImpl javaMailSender;
+    private final Properties properties;
+    private final JavaMailSenderImpl javaMailSender;
 
     public EmailSenderService(Properties properties, @Qualifier("sender") JavaMailSenderImpl javaMailSender) {
         this.properties = properties;

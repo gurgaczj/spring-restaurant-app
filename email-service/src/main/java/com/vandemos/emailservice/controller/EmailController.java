@@ -12,7 +12,7 @@ import javax.mail.MessagingException;
 @RestController
 public class EmailController {
 
-    private EmailSenderService emailSenderService;
+    private final EmailSenderService emailSenderService;
 
     public EmailController(EmailSenderService emailSenderService) {
         this.emailSenderService = emailSenderService;

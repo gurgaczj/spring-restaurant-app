@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @Service
 public class AppAuthFilter extends UsernamePasswordAuthenticationFilter {
 
-    private JwtUtils jwtUtils;
+    private final JwtUtils jwtUtils;
 
     public AppAuthFilter(JwtUtils jwtUtils) {
         this.jwtUtils = jwtUtils;

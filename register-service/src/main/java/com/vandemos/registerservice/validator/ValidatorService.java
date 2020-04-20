@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ValidatorService {
 
-    private ValidatorUtils validatorUtils;
+    private final ValidatorUtils validatorUtils;
 
     public ValidatorService(ValidatorUtils validatorUtils) {
         this.validatorUtils = validatorUtils;
