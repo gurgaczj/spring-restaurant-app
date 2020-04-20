@@ -1,10 +1,12 @@
 # spring-restaurant-app
 Restaurant app made with Spring
 
-Main purpose of this project is to learn Spring, REST API design and communication between microservices.
+Main purpose of this project is to learn Spring, REST API design, communication between microservices, MongoDB and testing (unit and integration).
 
 ToDo:
-- authentication
+- register service (done)
+- email sender (done)
+- authentication (done)
 - authorization
 - menu
 - orders
