@@ -5,6 +5,7 @@ import com.vandemos.registerservice.exception.ConfirmationException;
 import com.vandemos.registerservice.model.Mail;
 import com.vandemos.registerservice.model.RegisterModel;
 import com.vandemos.registerservice.validator.ValidatorService;
+import com.vandemos.registerservice.validator.ValidatorServiceImpl;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.stereotype.Service;
 

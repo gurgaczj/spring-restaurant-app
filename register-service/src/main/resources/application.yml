@@ -13,4 +13,13 @@ eureka:
     prefer-ip-address: true
 server:
   port: 8081
+feign:
+  client:
+    config:
+      email-service:
+        connectTimeout: 2000
+        readTimeout: 2000
+        loggerLevel: basic
+
+
 
