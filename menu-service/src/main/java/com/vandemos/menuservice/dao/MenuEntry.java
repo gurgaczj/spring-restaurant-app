@@ -1,9 +1,15 @@
 package com.vandemos.menuservice.dao;
 
+import com.vandemos.menuservice.dto.IngredientDto;
+import com.vandemos.menuservice.dto.MenuEntryDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.modelmapper.Converter;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.spi.MappingContext;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
@@ -23,7 +29,11 @@ public class MenuEntry {
     private String id;
 
     private BigDecimal basePrice;
+    @DBRef
     private List<Ingredient> baseIngredients;
-    private String type;
-    private Map<Ingredient, BigDecimal> additionalIngredients;
+    @DBRef
+    private FoodType type;
+    private Map<String, BigDecimal> additionalIngredients;
+
+
 }

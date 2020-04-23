@@ -7,14 +7,9 @@ import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
 @Getter
-public class IngredientDto {
+public class FoodTypeDto {
 
     private String name;
-
-
-    public IngredientDto setName(String name){
-        this.name = name;
-        return this;
-    }
 }

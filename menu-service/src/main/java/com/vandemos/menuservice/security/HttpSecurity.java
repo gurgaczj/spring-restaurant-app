@@ -10,6 +10,6 @@ public class HttpSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(org.springframework.security.config.annotation.web.builders.HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/**").permitAll().anyRequest().authenticated();
+        http.authorizeRequests().antMatchers("/menu", "/menu/**").permitAll().anyRequest().authenticated();
     }
 }
