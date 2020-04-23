@@ -54,30 +54,36 @@ public class NewUserService {
         registrationDao.setHash(hash);
         registrationDao.setActivationDate(null);
 
-        Optional<RoleDao> roleDao = roleService.findByRoleName(RoleEnum.USER);
-        userDao.setRole(roleDao.orElseThrow(() -> {
-            //TODO: log error
-            return new RegisterException("Coś poszło nie tak. Spróbuj później");
-        }));
+        RoleDao roleDao = roleService.findByRoleEnum(RoleEnum.USER);
+        userDao.setRole(roleDao);
         userDao.setUserInfo(userInfoDao);
         userDao.setRegistration(registrationDao);
 
-        Optional<UserDao> optionalUserDao = userService.save(userDao);
+        UserDao newUser = userService.save(userDao);
 
-        return optionalUserDao.isPresent();
+        return newUser != null;
     }
 
     public boolean usernameExist(String username) {
-        return userService.findByUsername(username).isPresent();
+        try {
+            userService.findByUsername(username);
+        } catch (RuntimeException e){
+            return false;
+        }
+        return true;
     }
 
     public boolean emailExist(String email) {
-        return userService.findByEmail(email).isPresent();
+        try {
+            userService.findByEmail(email);
+        } catch (RuntimeException e){
+            return false;
+        }
+        return true;
     }
 
     public void confirmAccount(String username, String hash) {
-        UserDao user = userService.findByUsername(username).orElseThrow(() -> new UserNotFoundException(
-                "Nie znaleziono użytkownika o nazwie " + username +"."));
+        UserDao user = userService.findByUsername(username);
 
         if(user.isActivated()){
             throw new ConfirmationException("Konto zostało już aktywowane.");
@@ -99,9 +105,6 @@ public class NewUserService {
             throw new ConfirmationException("Klucze nie zgadzają się.");
         }
 
-        userService.save(user).orElseThrow(() -> {
-            //TODO: log error
-            return new ConfirmationException("Coś poszło nie tak, spróbuj później.");
-        });
+        userService.save(user);
     }
 }

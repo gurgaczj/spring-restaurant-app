@@ -13,6 +13,9 @@ eureka:
     prefer-ip-address: true
 server:
   port: 8083
+  error:
+    include-stacktrace: never
+
 
 jwt:
   expiration: 7 #days after jwt expires
