@@ -1,6 +1,7 @@
 package com.vandemos.menuservice.dto;
 
 import com.vandemos.menuservice.dao.Ingredient;
+import com.vandemos.menuservice.model.Pair;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,8 @@ import java.util.Map;
 public class MenuEntryDto {
 
     private FoodTypeDto type;
+    private String name;
+    private List<Pair<String, List<String>>> params;
     private Map<String, BigDecimal> additionalIngredients;
     private List<IngredientDto> baseIngredients;
     private BigDecimal basePrice;

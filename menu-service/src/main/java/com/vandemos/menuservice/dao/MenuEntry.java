@@ -2,6 +2,7 @@ package com.vandemos.menuservice.dao;
 
 import com.vandemos.menuservice.dto.IngredientDto;
 import com.vandemos.menuservice.dto.MenuEntryDto;
+import com.vandemos.menuservice.model.Pair;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,15 +21,16 @@ import java.util.Map;
 
 @Document(collection = "menu")
 @NoArgsConstructor
-@Getter
+@Getter()
 @Setter
 public class MenuEntry {
 
     @Id
     @MongoId(FieldType.OBJECT_ID)
     private String id;
-
+    private String name;
     private BigDecimal basePrice;
+    private List<Pair<String, List<String>>> params;
     @DBRef
     private List<Ingredient> baseIngredients;
     @DBRef

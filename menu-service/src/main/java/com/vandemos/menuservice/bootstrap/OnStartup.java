@@ -3,6 +3,7 @@ package com.vandemos.menuservice.bootstrap;
 import com.vandemos.menuservice.dao.FoodType;
 import com.vandemos.menuservice.dao.Ingredient;
 import com.vandemos.menuservice.dao.MenuEntry;
+import com.vandemos.menuservice.model.Pair;
 import com.vandemos.menuservice.repository.FoodTypeRepository;
 import com.vandemos.menuservice.repository.IngredientRepository;
 import com.vandemos.menuservice.repository.MenuEntryRepository;
@@ -12,9 +13,10 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-//@Component
+@Component
 public class OnStartup implements CommandLineRunner {
     private final IngredientRepository ingredientRepository;
     private final FoodTypeRepository foodTypeRepository;
@@ -50,6 +52,9 @@ public class OnStartup implements CommandLineRunner {
         Map<String, BigDecimal> additional = new HashMap();
         additional.put(save2.getId(), new BigDecimal("10.24"));
         menuEntry1.setAdditionalIngredients(additional);
+        menuEntry1.setName("Pizza dupa");
+        menuEntry1.setParams(Arrays.asList(new Pair<>("średnica", Arrays.asList("20", "30", "50")),
+                new Pair<>("ciasto", Arrays.asList("grube", "cienkie"))));
 
         MenuEntry e = menuEntryRepository.save(menuEntry1);
         e.getBaseIngredients().forEach(ingredient1 -> System.out.println(ingredient.getName()));
