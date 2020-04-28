@@ -8,6 +8,6 @@ ToDo:
 - email sender (done)
 - authentication (done)
 - authorization
-- menu
+- menu (on-going, menu-service branch)
 - orders
 - tests(!)
