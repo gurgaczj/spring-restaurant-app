@@ -13,17 +13,15 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 @Getter
 @Setter
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class Ingredient {
 
     @Id
     @MongoId(FieldType.OBJECT_ID)
     private String id;
 
+    @NonNull
     private String name;
-
-    public Ingredient(String name){
-        this.name = name;
-    }
 
     public IngredientDto toDto(){
         ModelMapper modelMapper = new ModelMapper();

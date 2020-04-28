@@ -18,10 +18,11 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 @Document(collection = "menu")
 @NoArgsConstructor
-@Getter()
+@Getter
 @Setter
 public class MenuEntry {
 
@@ -36,6 +37,4 @@ public class MenuEntry {
     @DBRef
     private FoodType type;
     private Map<String, BigDecimal> additionalIngredients;
-
-
 }

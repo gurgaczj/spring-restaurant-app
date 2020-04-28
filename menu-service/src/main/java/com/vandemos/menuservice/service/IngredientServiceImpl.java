@@ -14,11 +14,18 @@ public class IngredientServiceImpl implements IngredientService {
         this.ingredientRepository = ingredientRepository;
     }
 
+    @Override
     public Ingredient findByName(String name){
         return ingredientRepository.findFirstByName(name)
                 .orElseThrow(() -> new NotFoundException("Ingredient with name " + name + " was not found."));
     }
 
+    @Override
+    public Ingredient save(Ingredient ingredient) {
+        return ingredientRepository.save(ingredient);
+    }
+
+    @Override
     public Ingredient findById(String id){
         return ingredientRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Ingredient with id " + id + " was not found"));
