@@ -1,8 +1,9 @@
-package com.vandemos.menuservice.service;
+package com.vandemos.menuservice.service.impl;
 
 import com.vandemos.menuservice.dao.FoodType;
 import com.vandemos.menuservice.exception.NotFoundException;
 import com.vandemos.menuservice.repository.FoodTypeRepository;
+import com.vandemos.menuservice.service.FoodTypeService;
 import org.springframework.stereotype.Service;
 
 @Service

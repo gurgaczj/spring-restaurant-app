@@ -1,9 +1,10 @@
-package com.vandemos.menuservice.service;
+package com.vandemos.menuservice.service.impl;
 
 import com.vandemos.menuservice.dao.MenuEntry;
 import com.vandemos.menuservice.exception.MenuEntryNameExistException;
 import com.vandemos.menuservice.exception.NotFoundException;
 import com.vandemos.menuservice.repository.MenuEntryRepository;
+import com.vandemos.menuservice.service.MenuEntryService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

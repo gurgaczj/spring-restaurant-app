@@ -1,4 +1,4 @@
-package com.vandemos.menuservice.util;
+package com.vandemos.menuservice.util.impl;
 
 import com.vandemos.menuservice.dao.FoodType;
 import com.vandemos.menuservice.dao.Ingredient;
@@ -9,6 +9,7 @@ import com.vandemos.menuservice.dto.MenuEntryDto;
 import com.vandemos.menuservice.exception.NotFoundException;
 import com.vandemos.menuservice.service.FoodTypeService;
 import com.vandemos.menuservice.service.IngredientService;
+import com.vandemos.menuservice.util.MenuEntryUtil;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.spi.MappingContext;
