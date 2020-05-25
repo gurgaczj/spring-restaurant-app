@@ -32,13 +32,14 @@ public class MenuEntryServiceImpl implements MenuEntryService {
 
     @Override
     public MenuEntry save(MenuEntry menuEntry) {
-        try {
-            findByName(menuEntry.getName());
-            throw new MenuEntryNameExistException("Menu entry with name " + menuEntry.getName() + " already exist. " +
-                    "Try editing existing one or give new entry unique name.");
-        } catch (NotFoundException e){
-            return menuEntryRepository.save(menuEntry);
-        }
+        return menuEntryRepository.save(menuEntry);
+//        try {
+//            findByName(menuEntry.getName());
+//            throw new MenuEntryNameExistException("Menu entry with name " + menuEntry.getName() + " already exist. " +
+//                    "Try editing existing one or give new entry unique name.");
+//        } catch (NotFoundException e){
+//            return menuEntryRepository.save(menuEntry);
+//        }
     }
 
     @Override

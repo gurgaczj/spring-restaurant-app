@@ -1,20 +1,24 @@
 package com.vandemos.menuservice.controller;
 
-import com.vandemos.menuservice.dao.MenuEntry;
+import com.mongodb.MongoWriteException;
 import com.vandemos.menuservice.dto.MenuEntryDto;
 import com.vandemos.menuservice.service.MenuEntryService;
 import com.vandemos.menuservice.util.MenuEntryUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/menu")
 public class MenuController {
+    private static final Logger logger = LoggerFactory.getLogger("MenuController");
 
     private final MenuEntryService menuEntryService;
     private final MenuEntryUtil menuEntryUtil;
@@ -35,5 +39,17 @@ public class MenuController {
     //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> addNewMenuEntry(@RequestBody MenuEntryDto menuEntryDto){
         return ResponseEntity.ok(menuEntryUtil.toDto(menuEntryService.save(menuEntryUtil.toDao(menuEntryDto))));
+    }
+
+    @ControllerAdvice
+    protected static class MenuControllerAdvice {
+        private static final Logger logger = LoggerFactory.getLogger("MenuControllerAdvice");
+
+        @ExceptionHandler({ MongoWriteException.class, DuplicateKeyException.class})
+        protected ResponseEntity<?> handle(MongoWriteException exception, HttpServletRequest request){
+            return ResponseEntity
+                    .badRequest()
+                    .body("Menu entry with given name already exist.");
+        }
     }
 }
