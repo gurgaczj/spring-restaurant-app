@@ -2,11 +2,13 @@ package com.vandemos.menuservice.controller;
 
 import com.mongodb.MongoWriteException;
 import com.vandemos.menuservice.dto.MenuEntryDto;
+import com.vandemos.menuservice.model.ErrorMessage;
 import com.vandemos.menuservice.service.MenuEntryService;
 import com.vandemos.menuservice.util.MenuEntryUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,9 +49,15 @@ public class MenuController {
 
         @ExceptionHandler({ MongoWriteException.class, DuplicateKeyException.class})
         protected ResponseEntity<?> handle(MongoWriteException exception, HttpServletRequest request){
+            logger.error(exception.getMessage(), exception);
+            HttpStatus badRequestStatus = HttpStatus.BAD_REQUEST;
+            ErrorMessage errorMessage = new ErrorMessage(badRequestStatus.value(),
+                    badRequestStatus.name(),
+                    "Menu entry with given name already exist.",
+                    request.getRequestURI());
             return ResponseEntity
                     .badRequest()
-                    .body("Menu entry with given name already exist.");
+                    .body(errorMessage);
         }
     }
 }
