@@ -11,3 +11,4 @@ ToDo:
 - menu
 - orders
 - tests(!)
+- merge register-service into authentication
