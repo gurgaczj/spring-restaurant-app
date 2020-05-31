@@ -8,7 +8,7 @@ ToDo:
 - email sender (done)
 - authentication (done)
 - authorization
-- menu
+- menu-service
 - orders
-- tests(!)
+- tests(implementing tests for menu-service)
 - merge register-service into authentication
