@@ -12,7 +12,7 @@ import java.util.Optional;
 @RestController
 public class RegisterController {
 
-    private RegisterService registerService;
+    private final RegisterService registerService;
 
     public RegisterController(RegisterService registerService){
         this.registerService = registerService;
