@@ -1,7 +1,5 @@
 package com.vandemos.authenticationservice.user;
 
-import com.vandemos.authenticationservice.user.UserService;
-import org.springframework.security.config.authentication.UserServiceBeanDefinitionParser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
