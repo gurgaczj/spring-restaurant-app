@@ -19,19 +19,13 @@ import java.util.Optional;
 @Service
 public class NewUserService {
 
-    private AddressService addressService;
-    private UserService userService;
-    private UserInfoService userInfoService;
-    private RoleService roleService;
-    private RegistrationService registrationService;
-    private PasswordEncoder passwordEncoder;
+    private final UserService userService;
+    private final RoleService roleService;
+    private final PasswordEncoder passwordEncoder;
 
-    public NewUserService(AddressService addressService, UserService userService, UserInfoService userInfoService, RoleService roleService, RegistrationService registrationService, PasswordEncoder passwordEncoder) {
-        this.addressService = addressService;
+    public NewUserService(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
-        this.userInfoService = userInfoService;
         this.roleService = roleService;
-        this.registrationService = registrationService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -60,30 +54,36 @@ public class NewUserService {
         registrationDao.setHash(hash);
         registrationDao.setActivationDate(null);
 
-        Optional<RoleDao> roleDao = roleService.findByRoleName(RoleEnum.USER);
-        userDao.setRole(roleDao.orElseThrow(() -> {
-            //TODO: log error
-            return new RegisterException("Coś poszło nie tak. Spróbuj później");
-        }));
+        RoleDao roleDao = roleService.findByRoleEnum(RoleEnum.USER);
+        userDao.setRole(roleDao);
         userDao.setUserInfo(userInfoDao);
         userDao.setRegistration(registrationDao);
 
-        Optional<UserDao> optionalUserDao = userService.save(userDao);
+        UserDao newUser = userService.save(userDao);
 
-        return optionalUserDao.isPresent();
+        return newUser != null;
     }
 
     public boolean usernameExist(String username) {
-        return userService.findByUsername(username).isPresent();
+        try {
+            userService.findByUsername(username);
+        } catch (RuntimeException e){
+            return false;
+        }
+        return true;
     }
 
     public boolean emailExist(String email) {
-        return userService.findByEmail(email).isPresent();
+        try {
+            userService.findByEmail(email);
+        } catch (RuntimeException e){
+            return false;
+        }
+        return true;
     }
 
     public void confirmAccount(String username, String hash) {
-        UserDao user = userService.findByUsername(username).orElseThrow(() -> new UserNotFoundException(
-                "Nie znaleziono użytkownika o nazwie " + username +"."));
+        UserDao user = userService.findByUsername(username);
 
         if(user.isActivated()){
             throw new ConfirmationException("Konto zostało już aktywowane.");
@@ -105,9 +105,6 @@ public class NewUserService {
             throw new ConfirmationException("Klucze nie zgadzają się.");
         }
 
-        userService.save(user).orElseThrow(() -> {
-            //TODO: log error
-            return new ConfirmationException("Coś poszło nie tak, spróbuj później.");
-        });
+        userService.save(user);
     }
 }

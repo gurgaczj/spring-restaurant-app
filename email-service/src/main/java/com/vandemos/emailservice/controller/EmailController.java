@@ -1,20 +1,20 @@
 package com.vandemos.emailservice.controller;
 
 import com.vandemos.emailservice.model.Mail;
-import com.vandemos.emailservice.service.EmailSenderService;
+import com.vandemos.emailservice.service.EmailSenderServiceImpl;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.mail.MessagingException;
 
 @RestController
 public class EmailController {
 
-    private EmailSenderService emailSenderService;
+    private final EmailSenderServiceImpl emailSenderService;
 
-    public EmailController(EmailSenderService emailSenderService) {
+    public EmailController(EmailSenderServiceImpl emailSenderService) {
         this.emailSenderService = emailSenderService;
     }
 
@@ -23,12 +23,14 @@ public class EmailController {
      * @param mail
      */
     @PostMapping("/activation")
-    public void activateAccount(@RequestBody Mail mail) {
+    public ResponseEntity<Mail> activateAccount(@RequestBody Mail mail) {
         try {
-            emailSenderService.sendActivationMail(mail);
+            return ResponseEntity.ok(emailSenderService.sendActivationMail(mail));
         } catch (MessagingException e) {
-            e.printStackTrace();
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR, "Error while sending mail", e);
         }
 
     }
+
 }

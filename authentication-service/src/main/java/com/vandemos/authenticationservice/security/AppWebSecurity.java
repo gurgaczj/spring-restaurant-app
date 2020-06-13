@@ -15,6 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.context.SecurityContextRepository;
+import org.springframework.security.web.server.context.NoOpServerSecurityContextRepository;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,6 +27,8 @@ public class AppWebSecurity extends WebSecurityConfigurerAdapter {
     private final AppUserDetailsService userDetailsService;
     private final JwtUtils jwtUtils;
     //private AppAuthFilter appAuthFilter;
+
+
 
     public AppWebSecurity(AppUserDetailsService userDetailsService,
                           // , AppAuthFilter appAuthFilter
@@ -46,15 +50,16 @@ public class AppWebSecurity extends WebSecurityConfigurerAdapter {
             response.sendError(HttpStatus.BAD_REQUEST.value(),
                     exception.getMessage());
         });
-
-        //http.addFilter(appAuthFilter);
     }
 
     private void handleSuccess(HttpServletResponse response, Authentication authentication) {
         response.setStatus(HttpStatus.OK.value());
         response.setHeader(HttpHeaders.AUTHORIZATION,
                 String.join("", "Bearer ",
-                        jwtUtils.generateJwt(authentication.getName(), authentication.getAuthorities())));
+                        jwtUtils.generateAccessToken(authentication.getName(), authentication.getAuthorities())));
+        response.setHeader("Refresh-Token",
+                String.join("", "Bearer ",
+                        jwtUtils.generateRefreshToken(authentication.getName(), authentication.getAuthorities())));
     }
 
     @Override

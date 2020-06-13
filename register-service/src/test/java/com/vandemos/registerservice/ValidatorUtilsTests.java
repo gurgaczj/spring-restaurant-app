@@ -1,7 +1,7 @@
 package com.vandemos.registerservice;
 
-import com.vandemos.registerservice.validator.ValidatorService;
 import com.vandemos.registerservice.validator.ValidatorUtils;
+import com.vandemos.registerservice.validator.ValidatorUtilsImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -14,7 +14,7 @@ public class ValidatorUtilsTests {
 
     @Test
     public void passwordValidatorTest(){
-        ValidatorUtils validatorUtils = new ValidatorUtils();
+        ValidatorUtils validatorUtils = new ValidatorUtilsImpl();
 
         String password = "zaq1@WSX";
 
@@ -25,7 +25,7 @@ public class ValidatorUtilsTests {
 
     @Test
     public void passwodValidatorTest_notValidPassword(){
-        ValidatorUtils validatorUtils = new ValidatorUtils();
+        ValidatorUtils validatorUtils = new ValidatorUtilsImpl();
 
         String notValidPassword = "password";
 
