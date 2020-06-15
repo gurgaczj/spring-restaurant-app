@@ -9,7 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity(name = "address")
-public class AddressDao {
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,9 +35,9 @@ public class AddressDao {
 
     @OneToOne(mappedBy = "address", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
-    private UserInfoDao user;
+    private UserInfo user;
 
-    public AddressDao() {
+    public Address() {
     }
 
 
@@ -99,11 +99,11 @@ public class AddressDao {
         this.city = city;
     }
 
-    public UserInfoDao getUser() {
+    public UserInfo getUser() {
         return user;
     }
 
-    public void setUser(UserInfoDao user) {
+    public void setUser(UserInfo user) {
         this.user = user;
     }
 

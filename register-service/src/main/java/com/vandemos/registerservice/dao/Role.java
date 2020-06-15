@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity(name = "role")
-public class RoleDao {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +24,9 @@ public class RoleDao {
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<UserDao> user;
+    private List<User> user;
 
-    public RoleDao(){}
+    public Role(){}
 
     public RoleDto toDto() {
         ModelMapper modelMapper = new ModelMapper();
@@ -49,11 +49,11 @@ public class RoleDao {
         this.roleEnum = roleEnum;
     }
 
-    public List<UserDao> getUser() {
+    public List<User> getUser() {
         return user;
     }
 
-    public void setUser(List<UserDao> user) {
+    public void setUser(List<User> user) {
         this.user = user;
     }
 }

@@ -1,7 +1,6 @@
 package com.vandemos.registerservice.dto;
 
-import com.vandemos.registerservice.dao.AddressDao;
-import com.vandemos.registerservice.dao.RoleDao;
+import com.vandemos.registerservice.dao.Role;
 import com.vandemos.registerservice.model.RoleEnum;
 import org.modelmapper.ModelMapper;
 
@@ -24,8 +23,8 @@ public class RoleDto {
         this.roleEnum = roleEnum;
     }
 
-    public RoleDao toDao() {
+    public Role toDao() {
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(this, RoleDao.class);
+        return modelMapper.map(this, Role.class);
     }
 }

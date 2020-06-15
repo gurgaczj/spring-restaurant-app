@@ -1,15 +1,13 @@
 package com.vandemos.registerservice.service;
 
-import com.vandemos.registerservice.dao.RegistrationDao;
+import com.vandemos.registerservice.dao.Registration;
 import com.vandemos.registerservice.repository.RegistrationRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.Optional;
-
 @Service
-public class RegistrationService implements IRegistrationService<RegistrationDao, Long> {
+public class RegistrationService implements IRegistrationService<Registration, Long> {
 
     private final RegistrationRepository registrationRepository;
 
@@ -18,13 +16,13 @@ public class RegistrationService implements IRegistrationService<RegistrationDao
     }
 
     @Override
-    public RegistrationDao findById(Long id) {
+    public Registration findById(Long id) {
         return registrationRepository.findById(id)
                 .orElseThrow(() -> new RegistrationNotFound("Registration with id " + id + " was not found"));
     }
 
-    public RegistrationDao save(RegistrationDao registrationDao) {
-        return registrationRepository.save(registrationDao);
+    public Registration save(Registration registration) {
+        return registrationRepository.save(registration);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

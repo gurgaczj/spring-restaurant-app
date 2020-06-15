@@ -1,15 +1,15 @@
 package com.vandemos.registerservice.repository;
 
-import com.vandemos.registerservice.dao.UserDao;
+import com.vandemos.registerservice.dao.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends CrudRepository<UserDao, Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
 
-    Optional<UserDao> findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
-    Optional<UserDao> findByEmail(String email);
+    Optional<User> findByEmail(String email);
 }

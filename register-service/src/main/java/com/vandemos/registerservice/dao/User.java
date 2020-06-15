@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity(name = "user")
-public class UserDao {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,19 +33,19 @@ public class UserDao {
     @NotNull
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
-    private RoleDao role;
+    private Role role;
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "registration_info_id", referencedColumnName = "id")
-    private RegistrationDao registration;
+    private Registration registration;
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_info_id", referencedColumnName = "id")
-    private UserInfoDao userInfo;
+    private UserInfo userInfo;
 
-    public UserDao(){}
+    public User(){}
 
     public UserDto toDto() {
         ModelMapper modelMapper = new ModelMapper();
@@ -100,27 +100,27 @@ public class UserDao {
         isEnabled = enabled;
     }
 
-    public RoleDao getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(RoleDao role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    public RegistrationDao getRegistration() {
+    public Registration getRegistration() {
         return registration;
     }
 
-    public void setRegistration(RegistrationDao registration) {
+    public void setRegistration(Registration registration) {
         this.registration = registration;
     }
 
-    public UserInfoDao getUserInfo() {
+    public UserInfo getUserInfo() {
         return userInfo;
     }
 
-    public void setUserInfo(UserInfoDao userInfo) {
+    public void setUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
     }
 }
