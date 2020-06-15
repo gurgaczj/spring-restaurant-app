@@ -74,10 +74,11 @@ public class JwtUtilsImpl implements JwtUtils {
     @Override
     public Collection<? extends GrantedAuthority> getRoles(Jws<Claims> claims) {
         Collection<SimpleGrantedAuthority> result = new HashSet<>();
-        List<LinkedTreeMap> roleMaps =
-                (List<LinkedTreeMap>) claims.getBody().get("roles");
-        for (LinkedTreeMap map : roleMaps) {
-            result.add(new SimpleGrantedAuthority((String) map.get("role")));
+        @SuppressWarnings("unchecked")
+        List<LinkedTreeMap<String, String>> roleMaps =
+                (List<LinkedTreeMap<String, String>>) claims.getBody().get("roles");
+        for (LinkedTreeMap<String, String> map : roleMaps) {
+            result.add(new SimpleGrantedAuthority(map.get("role")));
         }
         return result;
     }

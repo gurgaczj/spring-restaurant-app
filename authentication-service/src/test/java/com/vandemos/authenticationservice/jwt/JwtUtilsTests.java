@@ -35,7 +35,7 @@ public class JwtUtilsTests {
         FieldSetter.setField(jwtUtils, jwtUtils.getClass().getDeclaredField("refreshTokenExpirationTime"), 10080);
         FieldSetter.setField(jwtUtils, jwtUtils.getClass().getDeclaredField("accessTokenSigningKey"), accessKey);
         FieldSetter.setField(jwtUtils, jwtUtils.getClass().getDeclaredField("refreshTokenSigningKey"), refreshKey);
-        FieldSetter.setField(jwtUtils, jwtUtils.getClass().getDeclaredField("appName"), "some-app");
+        FieldSetter.setField(jwtUtils, jwtUtils.getClass().getDeclaredField("audience"), "audience");
     }
 
     @Test
