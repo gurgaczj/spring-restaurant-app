@@ -1,49 +1,26 @@
 package com.vandemos.authenticationservice.jwt;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
-@EnableConfigurationProperties
-@Service
-public class JwtUtils {
+public interface JwtUtils {
 
-    @Value("${jwt.expiration}")
-    private Integer daysToExpire;
+    String generateAccessToken(String username, Collection<? extends GrantedAuthority> roles);
 
-    @Value("${jwt.signing-key}")
-    private String signingKey;
+    String generateRefreshToken(String username);
 
-    public String generateJwt(String username, List<? extends GrantedAuthority> roles){
-        return Jwts.builder()
-                .setAudience("restaurant app")
-                .setExpiration(getExpirationDate())
-                .setIssuer(username)
-                .setSubject("auth")
-                .setIssuedAt(new Date())
-                .claim("roles", roles)
-                .signWith(Keys.hmacShaKeyFor(signingKey.getBytes()))
-                .compact();
-    }
+    Jws<Claims> getAccessTokenClaims(String token);
+    Jws<Claims> getRefreshTokenClaims(String token);
 
-    private Date getActualDate() {
-        return toDate(LocalDateTime.now());
-    }
+    String getIssuer(Jws<Claims> claims);
 
-    private Date getExpirationDate() {
-        LocalDateTime expiration = LocalDateTime.now().plusDays(this.daysToExpire);
-        return toDate(expiration);
-    }
+    Collection<? extends GrantedAuthority> getRoles(Jws<Claims> claims);
 
-    private Date toDate(LocalDateTime dateTime){
-        return Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant());
-    }
+    Date getExperienceDate(Jws<Claims> claims);
+
+    Date getIssuedAtDate(Jws<Claims> claims);
 }
