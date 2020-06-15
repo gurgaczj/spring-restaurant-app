@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: restaurant-authentication-service
+  datasource:
+    url: jdbc:h2:~/testdb;DB_CLOSE_ON_EXIT=FALSE
+    username: user
+    password:
+    driver-class-name: org.h2.Driver
+
+jwt:
+  audience: Restaurant authoriaztaion
+  access:
+    expiration: 120
+    signing-key: 2K8hHJdVgyPYh8OTnYPIl9gBb05wLTATqv0Z623jH3wokVwkqGM10i/m10Gof5ry
+  refresh:
+    expiration: 10080
+    signing-key: bQeThWmYq3t6w9z$C&F)J@NcRfUjXn2r4u7x!A%D*G-KaPdSgVkYp3s6v8y/B?E(
