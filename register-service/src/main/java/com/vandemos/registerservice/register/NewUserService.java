@@ -1,12 +1,11 @@
 package com.vandemos.registerservice.register;
 
-import com.vandemos.registerservice.dao.RegistrationDao;
-import com.vandemos.registerservice.dao.RoleDao;
-import com.vandemos.registerservice.dao.UserDao;
-import com.vandemos.registerservice.dao.UserInfoDao;
+import com.vandemos.registerservice.dao.Registration;
+import com.vandemos.registerservice.dao.Role;
+import com.vandemos.registerservice.dao.User;
+import com.vandemos.registerservice.dao.UserInfo;
 import com.vandemos.registerservice.exception.ConfirmationException;
 import com.vandemos.registerservice.exception.RegisterException;
-import com.vandemos.registerservice.exception.UserNotFoundException;
 import com.vandemos.registerservice.model.RegisterModel;
 import com.vandemos.registerservice.model.RoleEnum;
 import com.vandemos.registerservice.service.*;
@@ -14,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 public class NewUserService {
@@ -38,28 +36,28 @@ public class NewUserService {
             throw new RegisterException("Adres email jest już zajęty");
         }
 
-        UserDao userDao = new UserDao();
-        userDao.setUsername(registerModel.getUsername());
-        userDao.setEmail(registerModel.getEmail());
-        userDao.setPassword(passwordEncoder.encode(registerModel.getPassword()));
-        userDao.setActivated(false);
-        userDao.setEnabled(false);
+        User user = new User();
+        user.setUsername(registerModel.getUsername());
+        user.setEmail(registerModel.getEmail());
+        user.setPassword(passwordEncoder.encode(registerModel.getPassword()));
+        user.setActivated(false);
+        user.setEnabled(false);
 
-        UserInfoDao userInfoDao = registerModel.getUser().toDao();
-        userInfoDao.setUser(null);
-        userInfoDao.getAddress().setUser(null);
+        UserInfo userInfo = registerModel.getUser().toDao();
+        userInfo.setUser(null);
+        userInfo.getAddress().setUser(null);
 
-        RegistrationDao registrationDao = new RegistrationDao();
-        registrationDao.setRegistrationDate(LocalDateTime.now());
-        registrationDao.setHash(hash);
-        registrationDao.setActivationDate(null);
+        Registration registration = new Registration();
+        registration.setRegistrationDate(LocalDateTime.now());
+        registration.setHash(hash);
+        registration.setActivationDate(null);
 
-        RoleDao roleDao = roleService.findByRoleEnum(RoleEnum.USER);
-        userDao.setRole(roleDao);
-        userDao.setUserInfo(userInfoDao);
-        userDao.setRegistration(registrationDao);
+        Role role = roleService.findByRoleEnum(RoleEnum.USER);
+        user.setRole(role);
+        user.setUserInfo(userInfo);
+        user.setRegistration(registration);
 
-        UserDao newUser = userService.save(userDao);
+        User newUser = userService.save(user);
 
         return newUser != null;
     }
@@ -83,7 +81,7 @@ public class NewUserService {
     }
 
     public void confirmAccount(String username, String hash) {
-        UserDao user = userService.findByUsername(username);
+        User user = userService.findByUsername(username);
 
         if(user.isActivated()){
             throw new ConfirmationException("Konto zostało już aktywowane.");

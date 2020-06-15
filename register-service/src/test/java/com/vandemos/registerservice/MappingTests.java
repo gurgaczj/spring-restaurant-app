@@ -16,74 +16,74 @@ public class MappingTests {
 
     @Test
     public void daoToDtoTests(){
-        AddressDao addressDao = new AddressDao();
-        addressDao.setId(1L);
-        addressDao.setAparmentNumber(Short.valueOf("12"));
-        addressDao.setCity("asd");
-        addressDao.setFlatNumber(Short.valueOf("133"));
-        addressDao.setHouseNumber(Short.valueOf("15"));
-        addressDao.setPostalCode("12-123");
-        addressDao.setStreet("asffff");
+        Address address = new Address();
+        address.setId(1L);
+        address.setAparmentNumber(Short.valueOf("12"));
+        address.setCity("asd");
+        address.setFlatNumber(Short.valueOf("133"));
+        address.setHouseNumber(Short.valueOf("15"));
+        address.setPostalCode("12-123");
+        address.setStreet("asffff");
 
-        AddressDto addressDto = addressDao.toDto();
+        AddressDto addressDto = address.toDto();
 
-        assertEquals(addressDao.getCity(), addressDto.getCity());
-        assertEquals(addressDao.getAparmentNumber(), addressDto.getAparmentNumber());
-        assertEquals(addressDao.getFlatNumber(), addressDto.getFlatNumber());
-        assertEquals(addressDao.getHouseNumber(), addressDto.getHouseNumber());
-        assertEquals(addressDao.getPostalCode(), addressDto.getPostalCode());
-        assertEquals(addressDao.getStreet(), addressDto.getStreet());
+        assertEquals(address.getCity(), addressDto.getCity());
+        assertEquals(address.getAparmentNumber(), addressDto.getAparmentNumber());
+        assertEquals(address.getFlatNumber(), addressDto.getFlatNumber());
+        assertEquals(address.getHouseNumber(), addressDto.getHouseNumber());
+        assertEquals(address.getPostalCode(), addressDto.getPostalCode());
+        assertEquals(address.getStreet(), addressDto.getStreet());
 
-        UserInfoDao userInfoDao = new UserInfoDao();
-        userInfoDao.setId(1L);
-        userInfoDao.setAddress(addressDao);
-        userInfoDao.setFirstName("imie");
-        userInfoDao.setLastName("nazwisko");
-        userInfoDao.setPhoneNumber(123123123);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(1L);
+        userInfo.setAddress(address);
+        userInfo.setFirstName("imie");
+        userInfo.setLastName("nazwisko");
+        userInfo.setPhoneNumber(123123123);
 
-        UserInfoDto userInfoDto = userInfoDao.toDto();
+        UserInfoDto userInfoDto = userInfo.toDto();
 
-        assertEquals(userInfoDao.getFirstName(), userInfoDto.getFirstName());
-        assertEquals(userInfoDao.getLastName(), userInfoDto.getLastName());
-        assertEquals(userInfoDao.getPhoneNumber(), userInfoDto.getPhoneNumber());
+        assertEquals(userInfo.getFirstName(), userInfoDto.getFirstName());
+        assertEquals(userInfo.getLastName(), userInfoDto.getLastName());
+        assertEquals(userInfo.getPhoneNumber(), userInfoDto.getPhoneNumber());
         assertNotNull(userInfoDto.getAddress());
-        assertEquals(userInfoDao.getAddress().getCity(), userInfoDto.getAddress().getCity());
+        assertEquals(userInfo.getAddress().getCity(), userInfoDto.getAddress().getCity());
 
 
-        RoleDao roleDao = new RoleDao();
-        roleDao.setRoleEnum(RoleEnum.ADMIN);
+        Role role = new Role();
+        role.setRoleEnum(RoleEnum.ADMIN);
 
-        RoleDto roleDto = roleDao.toDto();
+        RoleDto roleDto = role.toDto();
 
-        assertEquals(roleDao.getRoleEnum().name(), roleDto.getRoleEnum().name());
+        assertEquals(role.getRoleEnum().name(), roleDto.getRoleEnum().name());
 
-        RegistrationDao registrationDao = new RegistrationDao();
-        registrationDao.setId(1L);
-        registrationDao.setRegistrationDate(LocalDateTime.now());
-        registrationDao.setHash("asdasd");
-        registrationDao.setActivationDate(LocalDateTime.MAX);
+        Registration registration = new Registration();
+        registration.setId(1L);
+        registration.setRegistrationDate(LocalDateTime.now());
+        registration.setHash("asdasd");
+        registration.setActivationDate(LocalDateTime.MAX);
 
-        RegistrationDto registrationDto = registrationDao.toDto();
+        RegistrationDto registrationDto = registration.toDto();
 
-        assertEquals(registrationDao.getRegistrationDate(), registrationDto.getRegistrationDate());
-        assertEquals(registrationDao.getHash(), registrationDto.getHash());
-        assertEquals(registrationDao.getActivationDate(), registrationDto.getActivationDate());
+        assertEquals(registration.getRegistrationDate(), registrationDto.getRegistrationDate());
+        assertEquals(registration.getHash(), registrationDto.getHash());
+        assertEquals(registration.getActivationDate(), registrationDto.getActivationDate());
 
-        UserDao userDao = new UserDao();
-        userDao.setId(1L);
-        userDao.setActivated(true);
-        userDao.setEnabled(false);
-        userDao.setEmail("mail@mail.com");
-        userDao.setUsername("uname");
-        userDao.setPassword("pass");
-        userDao.setRegistration(registrationDao);
-        userDao.setRole(roleDao);
-        userDao.setUserInfo(userInfoDao);
+        User user = new User();
+        user.setId(1L);
+        user.setActivated(true);
+        user.setEnabled(false);
+        user.setEmail("mail@mail.com");
+        user.setUsername("uname");
+        user.setPassword("pass");
+        user.setRegistration(registration);
+        user.setRole(role);
+        user.setUserInfo(userInfo);
 
-        UserDto userDto = userDao.toDto();
+        UserDto userDto = user.toDto();
 
-        assertEquals(userDao.getEmail(), userDto.getEmail());
-        assertEquals(userDao.getUsername(), userDto.getUsername());
+        assertEquals(user.getEmail(), userDto.getEmail());
+        assertEquals(user.getUsername(), userDto.getUsername());
         assertNotNull(userDto.getRegistration());
         assertNotNull(userDto.getUserInfo());
         assertNotNull(userDto.getRole());

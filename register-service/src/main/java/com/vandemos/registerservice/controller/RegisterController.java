@@ -27,9 +27,9 @@ public class RegisterController {
     }
 
     @GetMapping("/confirm")
-    public ResponseEntity<?> confirmRegistration(@RequestParam(name = "key") Optional<String> key,
-                                                 @RequestParam(name = "username") Optional<String> username){
-        registerService.confirmAccount(username, key);
+    public ResponseEntity<?> confirmRegistration(@RequestParam(name = "key") String key,
+                                                 @RequestParam(name = "username") String username){
+        registerService.confirmAccount(Optional.ofNullable(username), Optional.ofNullable(key));
         return ResponseEntity.ok().body(new Message("Pomyślnie aktywowano konto ;)"));
     }
 }
