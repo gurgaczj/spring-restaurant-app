@@ -1,7 +1,7 @@
 package com.vandemos.registerservice.repository;
 
-import com.vandemos.registerservice.dao.RegistrationDao;
+import com.vandemos.registerservice.dao.Registration;
 import org.springframework.data.repository.CrudRepository;
 
-public interface RegistrationRepository extends CrudRepository<RegistrationDao, Long> {
+public interface RegistrationRepository extends CrudRepository<Registration, Long> {
 }

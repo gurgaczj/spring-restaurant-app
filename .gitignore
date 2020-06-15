@@ -24,6 +24,5 @@ hs_err_pid*
 
 /authentication-service
 /email-service
-/register-service
 /eureka
 /menu-service

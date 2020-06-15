@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity(name = "registration_info")
-public class RegistrationDao {
+public class Registration {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +29,9 @@ public class RegistrationDao {
 
     @OneToOne(mappedBy = "registration", cascade = CascadeType.ALL)
     @JsonIgnore
-    private UserDao user;
+    private User user;
 
-    public RegistrationDao(){}
+    public Registration(){}
 
     public RegistrationDto toDto() {
         ModelMapper modelMapper = new ModelMapper();
@@ -71,11 +71,11 @@ public class RegistrationDao {
         this.activationDate = activationDate;
     }
 
-    public UserDao getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserDao user) {
+    public void setUser(User user) {
         this.user = user;
     }
 }

@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity(name = "user_info")
-public class UserInfoDao {
+public class UserInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,13 +30,13 @@ public class UserInfoDao {
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private AddressDao address;
+    private Address address;
 
     @OneToOne(mappedBy = "userInfo", cascade = CascadeType.ALL)
     @JsonIgnore
-    private UserDao user;
+    private User user;
 
-    public UserInfoDao() {
+    public UserInfo() {
     }
 
     public Long getId() {
@@ -71,19 +71,19 @@ public class UserInfoDao {
         this.phoneNumber = phoneNumber;
     }
 
-    public AddressDao getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(AddressDao address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
-    public UserDao getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserDao user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

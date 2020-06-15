@@ -1,14 +1,12 @@
 package com.vandemos.registerservice.service;
 
-import com.vandemos.registerservice.dao.UserDao;
+import com.vandemos.registerservice.dao.User;
 import com.vandemos.registerservice.exception.UserNotFoundException;
 import com.vandemos.registerservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
-public class UserService implements IUserService<UserDao, Long> {
+public class UserService implements IUserService<User, Long> {
 
     private final UserRepository userRepository;
 
@@ -16,20 +14,20 @@ public class UserService implements IUserService<UserDao, Long> {
         this.userRepository = userRepository;
     }
 
-    public UserDao findById(Long id) {
+    public User findById(Long id) {
         return userRepository.findById(id).orElseThrow();
     }
 
-    public UserDao save(UserDao userDao) {
-        return userRepository.save(userDao);
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
-    public UserDao findByUsername(String username) {
+    public User findByUsername(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("User with username " + username + " was not found"));
     }
 
-    public UserDao findByEmail(String email) {
+    public User findByEmail(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("User with email " + email + " was not found."));
     }
