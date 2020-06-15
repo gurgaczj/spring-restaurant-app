@@ -5,6 +5,7 @@ import com.vandemos.registerservice.exception.ConfirmationException;
 import com.vandemos.registerservice.model.Mail;
 import com.vandemos.registerservice.model.RegisterModel;
 import com.vandemos.registerservice.validator.ValidatorService;
+import com.vandemos.registerservice.validator.ValidatorServiceImpl;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,9 @@ import java.util.Optional;
 @Service
 public class RegisterService {
 
-    private ValidatorService validatorService;
-    private NewUserService newUserService;
-    private EmailServiceClient emailServiceClient;
+    private final ValidatorService validatorService;
+    private final NewUserService newUserService;
+    private final EmailServiceClient emailServiceClient;
 
     public RegisterService(ValidatorService validatorService, NewUserService newUserService, EmailServiceClient emailServiceClient) {
         this.validatorService = validatorService;
