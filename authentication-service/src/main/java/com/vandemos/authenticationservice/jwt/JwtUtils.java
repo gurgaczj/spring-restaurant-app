@@ -11,15 +11,16 @@ public interface JwtUtils {
 
     String generateAccessToken(String username, Collection<? extends GrantedAuthority> roles);
 
-    String generateRefreshToken(String username, Collection<? extends GrantedAuthority> roles);
+    String generateRefreshToken(String username);
 
-    Jws<Claims> parseClaims(String token);
+    Jws<Claims> getAccessTokenClaims(String token);
+    Jws<Claims> getRefreshTokenClaims(String token);
 
-    String getIssuer(String token);
+    String getIssuer(Jws<Claims> claims);
 
-    Collection<? extends GrantedAuthority> getRoles(String token);
+    Collection<? extends GrantedAuthority> getRoles(Jws<Claims> claims);
 
-    Date getExperienceDate(String token);
+    Date getExperienceDate(Jws<Claims> claims);
 
-    Date getIssuedAtDate(String token);
+    Date getIssuedAtDate(Jws<Claims> claims);
 }

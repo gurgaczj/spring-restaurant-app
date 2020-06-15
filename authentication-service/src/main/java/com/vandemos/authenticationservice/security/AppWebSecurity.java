@@ -40,7 +40,7 @@ public class AppWebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable();
+        http.csrf().disable();
 
         http.formLogin().usernameParameter("username").passwordParameter("password")
         .successHandler((request, response, authentication) -> {
@@ -59,7 +59,7 @@ public class AppWebSecurity extends WebSecurityConfigurerAdapter {
                         jwtUtils.generateAccessToken(authentication.getName(), authentication.getAuthorities())));
         response.setHeader("Refresh-Token",
                 String.join("", "Bearer ",
-                        jwtUtils.generateRefreshToken(authentication.getName(), authentication.getAuthorities())));
+                        jwtUtils.generateRefreshToken(authentication.getName())));
     }
 
     @Override
