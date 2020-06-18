@@ -5,6 +5,8 @@ spring:
     url: jdbc:mysql://localhost:3306/restaurant_users
     username: root
     password: password
+  liquibase:
+    change-log: classpath:db/prod/changelog.xml
 eureka:
   client:
     service-url:
@@ -15,7 +17,6 @@ server:
   port: 8083
   error:
     include-stacktrace: never
-
 
 jwt:
   audience: Restaurant authoriaztaion
