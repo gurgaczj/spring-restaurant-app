@@ -16,7 +16,7 @@ public class ForgotPasswordController {
 
     @PostMapping("/reset-password")
     public ResponseEntity<Boolean> changePassword(@RequestBody UserNewPassword newPassword){
-
+        return ResponseEntity.ok(forgotPasswordService.changePassword(newPassword));
     }
 
 }

@@ -7,9 +7,9 @@ public interface ValidatorService {
 
     boolean validateNewPassword(UserNewPassword userNewPassword);
 
-    default boolean validatePasswordsTheSame(String password, String confirmPassword){
-        if(!password.equals(confirmPassword)){
-            throw new ValidationException("Hasła nie są takie same.");
+    default boolean validateHashedPasswordsTheSame(String actualPassword, String passwordFromRequest){
+        if(!actualPassword.equals(passwordFromRequest)){
+            throw new ValidationException("Stare hasła nie pasują.");
         }
         return true;
     }
