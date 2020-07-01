@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 public class UserNewPassword {
 
     private String username;
+    private String oldPassword;
     private String password;
     private String confirmPassword;
 }
