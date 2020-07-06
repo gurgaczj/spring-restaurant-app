@@ -19,7 +19,7 @@ server:
     include-stacktrace: never
 
 jwt:
-  audience: Restaurant authoriaztaion
+  audience: Restaurant authentication
   access:
     expiration: 120
     signing-key: 2K8hHJdVgyPYh8OTnYPIl9gBb05wLTATqv0Z623jH3wokVwkqGM10i/m10Gof5ry

@@ -3,16 +3,16 @@ spring:
     name: restaurant-authentication-service
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
     username: user
     password:
     driver-class-name: org.h2.Driver
-    liquibase:
-      change-log: classpath:db/test/changelog.xml
 
 jwt:
-  audience: Restaurant authoriaztaion
+  audience: Restaurant authentication
   access:
     expiration: 120
     signing-key: 2K8hHJdVgyPYh8OTnYPIl9gBb05wLTATqv0Z623jH3wokVwkqGM10i/m10Gof5ry
