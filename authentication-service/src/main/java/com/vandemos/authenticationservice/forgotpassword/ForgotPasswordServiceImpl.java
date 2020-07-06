@@ -32,7 +32,7 @@ public class ForgotPasswordServiceImpl implements ForgotPasswordService {
 
         String hashedOldPassword = passwordEncoder.encode(userNewPassword.getOldPassword());
 
-        validatorService.validateHashedPasswordsTheSame(user.getUsername(), hashedOldPassword);
+        validatorService.validateHashedPasswordsTheSame(user.getPassword(), hashedOldPassword);
 
         user.setPassword(hashedOldPassword);
         userService.save(user);
