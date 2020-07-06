@@ -26,4 +26,8 @@ public class UserServiceImpl implements UserService {
                 orElseThrow(() -> new UsernameNotFoundException("User with username " + username + " was not found"));
     }
 
+    @Override
+    public User save(User user) {
+        return userRepository.save(user);
+    }
 }
