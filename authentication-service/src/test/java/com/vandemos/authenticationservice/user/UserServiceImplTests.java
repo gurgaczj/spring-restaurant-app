@@ -1,6 +1,8 @@
 package com.vandemos.authenticationservice.user;
 
 import com.vandemos.authenticationservice.exception.UserNotFoundException;
+import com.vandemos.authenticationservice.role.Role;
+import com.vandemos.authenticationservice.role.RoleEnum;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -56,7 +58,7 @@ public class UserServiceImplTests {
         assertEquals(user.getEmail(), result.getEmail());
     }
 
-    private User createTestUser() {
+    static public User createTestUser() {
         User user = new User();
         user.setEnabled(true);
         user.setActivated(true);
@@ -64,6 +66,11 @@ public class UserServiceImplTests {
         user.setPassword("password");
         user.setUsername("username");
         user.setId(1L);
+
+        Role role = new Role();
+        role.setRoleEnum(RoleEnum.USER);
+        role.setId(1L);
+        user.setRole(role);
         return user;
     }
 }
